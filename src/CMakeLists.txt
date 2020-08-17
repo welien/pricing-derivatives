@@ -3,9 +3,9 @@
 
 # Optionally glob, but only for CMake 3.12 or later:
 # file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${ModernCMakeExample_SOURCE_DIR}/include/dataloader/*.hpp")
-set(HEADER_LIST "${EvolutionaryDerivatives_SOURCE_DIR}/include/dataloader/dataset.hpp"
-                "${EvolutionaryDerivatives_SOURCE_DIR}/include/strategies/black-scholes.hpp"
-                "${EvolutionaryDerivatives_SOURCE_DIR}/include/simulation/montecarlo.hpp")
+set(HEADER_LIST "${PricingDerivatives_SOURCE_DIR}/include/dataloader/dataset.hpp"
+                "${PricingDerivatives_SOURCE_DIR}/include/strategies/black-scholes.hpp"
+                "${PricingDerivatives_SOURCE_DIR}/include/simulation/montecarlo.hpp")
 
 # Make an automatic library - will be static or dynamic based on user setting
 add_library(dataset dataset.cpp ${HEADER_LIST})
