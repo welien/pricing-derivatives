@@ -2,7 +2,7 @@
 #include <chrono> 
 
 #include <dataloader/dataset.hpp>
-#include <simulation/montecarlo.hpp>
+#include <simulation/experiments.hpp>
 
 int main(int argc, char** argv) {
     printf("Welcome to experiments in pricing vanilla European options.\n");
@@ -24,13 +24,17 @@ int main(int argc, char** argv) {
         return 0;
     }
     
-    int historyLength = 1000;
-    int maxFuture = 100;
+    int historyLength = 100;
+    int maxFuture = 10;
     double riskFreeDailyContinuousRate = 0.000054;
+    //double riskFreeDailyContinuousRate = 0.2;
     
-    auto start = std::chrono::high_resolution_clock::now(); 
-    mc::experiment(*colRefReturns, *colRefPrice, historyLength, maxFuture, riskFreeDailyContinuousRate);
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-    std::cout << "Duration: " << duration.count() << std::endl;
+    //auto start = std::chrono::high_resolution_clock::now(); 
+    std::cout << "Experiment with Black-Scholes options pricing:" << std::endl;
+    ex::BSExperiment(*colRefReturns, *colRefPrice, historyLength, maxFuture, riskFreeDailyContinuousRate);
+    //auto stop = std::chrono::high_resolution_clock::now();
+    //auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+    //std::cout << "Duration: " << duration.count() << std::endl;
+    std::cout << "Experiment with binomial model options pricing:" << std::endl;
+    ex::binomialExperiment(*colRefReturns, *colRefPrice, historyLength, maxFuture, riskFreeDailyContinuousRate);
 }

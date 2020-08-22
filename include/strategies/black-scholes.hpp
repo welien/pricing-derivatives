@@ -16,4 +16,6 @@ namespace bs {
     double call(int current, int tau, double r, int history, double st, double k, std::vector<double> &col);
     double put(int current, int tau, double r, int history, double st, double k, std::vector<double> &col);
     double vectorSTD(std::vector<double> &data, int lowerBound, int upperBound);
+    double vectorSTDfaster(std::vector<double> &data, int lowerBound, int upperBound);
+    std::pair<double, double> getCallPut(int tau, double sigma, double st, double k, double r);
 }

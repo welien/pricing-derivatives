@@ -56,7 +56,7 @@ namespace bs {
 
         for(i = lowerBound; i < upperBound; i++)
         {
-            sum += data.at(i);
+            sum += data[i];
         }
 
         mean = sum/(upperBound-lowerBound);
@@ -64,6 +64,20 @@ namespace bs {
         for(i = lowerBound; i < upperBound; i++)
             standardDeviation += pow(data.at(i) - mean, 2);
 
-        return sqrt(standardDeviation / (upperBound-lowerBound));
+        double correction = data.size() / (data.size() - 1);
+        //double correction = 1.0;
+
+        return sqrt(standardDeviation / (upperBound-lowerBound)) * correction;
+    }
+
+    // this function calculates both options at the same time - this should in theory cut computation in half
+    std::pair<double, double> getCallPut(int tau, double sigma, double st, double k, double r) {
+        double d1 = log(st/k) + (r + pow(sigma, 2)/2) * tau;
+        d1 = d1 * (1 / (sigma * sqrt(tau)));
+        double d2 = d1 - sigma * sqrt(tau);
+        double pvk = k * exp(r * tau * -1);
+        double call = normalCDF(d1) * st - normalCDF(d2) * pvk;
+        double put = call - st + pvk;
+        return {call,put};
     }
 }
